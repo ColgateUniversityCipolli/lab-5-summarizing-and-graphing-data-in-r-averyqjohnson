@@ -82,3 +82,24 @@ results <- lapply(numeric_columns, function(feature) {
 
 combined_results <- bind_rows(results)
 view(combined_results)
+
+# detect the 20 features we want to investigate
+selected_features <-  c("positivewords", "OtherP", "Perception", "conj", "chords_strength",
+                        "average_loudness", "barkbands_flatness_db","barkbands_skewness", "dissonance",
+                        "erbbands_flatness_db", "erbbands_skewness", "melbands_flatness_db",
+                        "melbands_spread", "spectral_centroid", "spectral_complexity",
+                        "spectral_energyband_middle_high", "spectral_entropy",
+                        "spectral_kurtosis", "spectral_rolloff", "spectral_skewness")
+
+# filter results to only indicate these features
+filtered_results <- combined_results |>
+  filter(feature %in% selected_features)
+
+view(filtered_results)
+
+# create Latex table
+library(xtable)
+latex_table <- xtable(filtered_results, caption="Summary of Features Identifying Influencing Band")
+
+print(latex_table, include.rownames = FALSE, caption.placement = "top")
+                      
