@@ -83,20 +83,96 @@ results <- lapply(numeric_columns, function(feature) {
 combined_results <- bind_rows(results)
 view(combined_results)
 
-# detect the 20 features we want to investigate
+##############################################################################
+# Step 3: create a table that summarizes select features
+##############################################################################
+
+# detect the features we want to investigate
+# 4 LIWC data points and 4 essentia datapoints
 selected_features <-  c("positivewords", "OtherP", "Perception", "conj", "chords_strength",
                         "average_loudness", "dissonance", "spectral_rolloff")
 
 # filter results to only indicate these features
 filtered_results <- combined_results |>
   filter(feature %in% selected_features) |>
-  # keep only the artist, feature, and description
   select(artist, description, feature) 
 
-view(filtered_results)
+View(filtered_results)
+
 
 # create Latex table
 library(xtable)
-latex_table <- xtable(filtered_results, caption="Summary of Features Identifying Influencing Band")
-# print(latex_table, include.rownames = FALSE, caption.placement = "top")
-                      
+latex_table <- xtable(filtered_results, 
+                      caption="Summary of Features Identifying Influencing Band")
+
+##############################################################################
+# Step 4: create a graph or a series of graphs that summarize the selected features
+##############################################################################
+
+# Filter for lyrics features vs sound features
+lyric_features <- c("positivewords", "OtherP", "Perception", "conj")
+sound_features <- c("average_loudness", "chords_strength", "dissonance",
+                    "spectral_rolloff")
+
+lyric_results <- filtered_results |>
+  filter(feature %in% lyric_features)
+
+sound_results <- filtered_results |>
+  filter(feature %in% sound_features)
+
+lyric_counts <- lyric_results |>
+  group_by(artist, feature, description) |>
+  tally(name = "count")
+
+sound_counts <- sound_results |>
+  group_by(artist, feature, description) |>
+  tally(name = "count")
+
+lyric_plot <- ggplot(lyric_counts, aes(x = feature, y = count, fill = description)) +
+  geom_bar(stat = "identity", position="dodge") +
+  facet_wrap(~artist, scales="free_y") +
+  theme_bw() + 
+  xlab("Feature") +
+  ylab("Count") +
+  ggtitle("Lyrical Feature Comparison by Artist") +
+  scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
+                    labels = c("Out of Range", "Outlying", "Within Range"))
+
+sound_plot <- ggplot(sound_counts, aes(x = feature, y = count, fill = description)) +
+  geom_bar(stat = "identity", position="dodge") +
+  facet_wrap(~artist, scales="free_y") +
+  theme_bw() + 
+  xlab("Feature") +
+  ylab("Count") +
+  ggtitle("Sound Feature Comparison by Artist") +
+  scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
+                    labels = c("Out of Range", "Outlying", "Within Range"))
+
+library(patchwork)
+lyric_plot / sound_plot
+
+
+# create the lyrical feature plot
+# lyrics_plot <- ggplot(lyrics_results, aes(x = feature, fill=description)) +
+#   geom_bar(position = "dodge") + 
+#   facet_wrap(~ artist, scales="free_y") +
+#   theme_bw() +
+#   xlab("Feature") +
+#   ylab("Count") + 
+#   ggtitle("Lyrical Feature Comparison by Artist") + 
+#   scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
+#                       labels = c("Out of Range", "Outlying", "Within Range"))
+#   
+#   # create the sound feature plot
+# sound_plot <- ggplot(sound_results, aes(x = feature, fill=description)) +
+#   geom_bar(position = "dodge") + 
+#   facet_wrap(~ artist, scales="free_y") +
+#   theme_bw() +
+#   xlab("Feature") +
+#   ylab("Count") + 
+#   ggtitle("Sound Feature Comparison by Artist") + 
+#   scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
+#                     labels = c("Out of Range", "Outlying", "Within Range"))
+#   
+# library(patchwork)
+# lyrics_plot / sound_plot
