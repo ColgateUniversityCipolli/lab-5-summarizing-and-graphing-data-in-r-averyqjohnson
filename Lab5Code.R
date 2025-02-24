@@ -109,70 +109,54 @@ latex_table <- xtable(filtered_results,
 # Step 4: create a graph or a series of graphs that summarize the selected features
 ##############################################################################
 
+# graphs for lyrical features
+positivewords_plot <- ggplot(data=essentia_data,
+                             aes(x=artist,y= positivewords)) +
+  geom_boxplot() +
+  geom_hline(yinterecept=essentia_data_allentown$positivewords)
+  theme_bw() +
+  xlab("Artist") +
+  ylab("positivewords")
+
+
 # Filter for lyrics features vs sound features
-lyric_features <- c("positivewords", "OtherP", "Perception", "conj")
-sound_features <- c("average_loudness", "chords_strength", "dissonance",
-                    "spectral_rolloff")
-
-lyric_results <- filtered_results |>
-  filter(feature %in% lyric_features)
-
-sound_results <- filtered_results |>
-  filter(feature %in% sound_features)
-
-lyric_counts <- lyric_results |>
-  group_by(artist, feature, description) |>
-  tally(name = "count")
-
-sound_counts <- sound_results |>
-  group_by(artist, feature, description) |>
-  tally(name = "count")
-
-lyric_plot <- ggplot(lyric_counts, aes(x = feature, y = count, fill = description)) +
-  geom_bar(stat = "identity", position="dodge") +
-  facet_wrap(~artist, scales="free_y") +
-  theme_bw() + 
-  xlab("Feature") +
-  ylab("Count") +
-  ggtitle("Lyrical Feature Comparison by Artist") +
-  scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
-                    labels = c("Out of Range", "Outlying", "Within Range"))
-
-sound_plot <- ggplot(sound_counts, aes(x = feature, y = count, fill = description)) +
-  geom_bar(stat = "identity", position="dodge") +
-  facet_wrap(~artist, scales="free_y") +
-  theme_bw() + 
-  xlab("Feature") +
-  ylab("Count") +
-  ggtitle("Sound Feature Comparison by Artist") +
-  scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
-                    labels = c("Out of Range", "Outlying", "Within Range"))
-
-library(patchwork)
-lyric_plot / sound_plot
-
-
-# create the lyrical feature plot
-# lyrics_plot <- ggplot(lyrics_results, aes(x = feature, fill=description)) +
-#   geom_bar(position = "dodge") + 
-#   facet_wrap(~ artist, scales="free_y") +
-#   theme_bw() +
+# lyric_features <- c("positivewords", "OtherP", "Perception", "conj")
+# sound_features <- c("average_loudness", "chords_strength", "dissonance",
+#                     "spectral_rolloff")
+# 
+# lyric_results <- filtered_results |>
+#   filter(feature %in% lyric_features)
+# 
+# sound_results <- filtered_results |>
+#   filter(feature %in% sound_features)
+# 
+# lyric_counts <- lyric_results |>
+#   group_by(artist, feature, description) |>
+#   tally(name = "count")
+# 
+# sound_counts <- sound_results |>
+#   group_by(artist, feature, description) |>
+#   tally(name = "count")
+# 
+# lyric_plot <- ggplot(lyric_counts, aes(x = feature, y = count, fill = description)) +
+#   geom_bar(stat = "identity", position="dodge") +
+#   facet_wrap(~artist, scales="free_y") +
+#   theme_bw() + 
 #   xlab("Feature") +
-#   ylab("Count") + 
-#   ggtitle("Lyrical Feature Comparison by Artist") + 
-#   scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
-#                       labels = c("Out of Range", "Outlying", "Within Range"))
-#   
-#   # create the sound feature plot
-# sound_plot <- ggplot(sound_results, aes(x = feature, fill=description)) +
-#   geom_bar(position = "dodge") + 
-#   facet_wrap(~ artist, scales="free_y") +
-#   theme_bw() +
-#   xlab("Feature") +
-#   ylab("Count") + 
-#   ggtitle("Sound Feature Comparison by Artist") + 
+#   ylab("Count") +
+#   ggtitle("Lyrical Feature Comparison by Artist") +
 #   scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
 #                     labels = c("Out of Range", "Outlying", "Within Range"))
-#   
+# 
+# sound_plot <- ggplot(sound_counts, aes(x = feature, y = count, fill = description)) +
+#   geom_bar(stat = "identity", position="dodge") +
+#   facet_wrap(~artist, scales="free_y") +
+#   theme_bw() + 
+#   xlab("Feature") +
+#   ylab("Count") +
+#   ggtitle("Sound Feature Comparison by Artist") +
+#   scale_fill_manual(values = c("red", "red", "green"),  # Optional: color customization
+#                     labels = c("Out of Range", "Outlying", "Within Range"))
+# 
 # library(patchwork)
-# lyrics_plot / sound_plot
+# lyric_plot / sound_plot

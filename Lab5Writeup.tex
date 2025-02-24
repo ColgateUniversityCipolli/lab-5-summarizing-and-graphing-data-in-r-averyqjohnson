@@ -183,6 +183,41 @@ Task 3 involved extracting and compiling data for all JSON files in the Essentia
 \section{Discussion}
 Lab 2 successfully automated the process of generating batch file commands and processing JSON output to extract audio features for analysis. Task 1 demonstrated the efficiency of automating file handling and command generation, while Task 2 allowed for the extraction of key features from JSON files. In lab 3, we were successfully able to complete task 2 for a much larger data set. We extracted all the key features of each song and wrote the desired information into a CSV file that we can later use to analyze which band contributed most to the song.
 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlll}
+  \hline
+ & artist & description & feature \\ 
+  \hline
+1 & All Get Out & Out of Range & spectral\_rolloff \\ 
+  2 & Manchester Orchestra & Within Range & spectral\_rolloff \\ 
+  3 & The Front Bottoms & Out of Range & spectral\_rolloff \\ 
+  4 & All Get Out & Outlying & dissonance \\ 
+  5 & Manchester Orchestra & Within Range & dissonance \\ 
+  6 & The Front Bottoms & Out of Range & dissonance \\ 
+  7 & All Get Out & Outlying & average\_loudness \\ 
+  8 & Manchester Orchestra & Within Range & average\_loudness \\ 
+  9 & The Front Bottoms & Outlying & average\_loudness \\ 
+  10 & All Get Out & Outlying & chords\_strength \\ 
+  11 & Manchester Orchestra & Within Range & chords\_strength \\ 
+  12 & The Front Bottoms & Out of Range & chords\_strength \\ 
+  13 & All Get Out & Out of Range & conj \\ 
+  14 & Manchester Orchestra & Outlying & conj \\ 
+  15 & The Front Bottoms & Within Range & conj \\ 
+  16 & All Get Out & Out of Range & Perception \\ 
+  17 & Manchester Orchestra & Within Range & Perception \\ 
+  18 & The Front Bottoms & Out of Range & Perception \\ 
+  19 & All Get Out & Outlying & OtherP \\ 
+  20 & Manchester Orchestra & Outlying & OtherP \\ 
+  21 & The Front Bottoms & Within Range & OtherP \\ 
+  22 & All Get Out & Outlying & positivewords \\ 
+  23 & Manchester Orchestra & Outlying & positivewords \\ 
+  24 & The Front Bottoms & Within Range & positivewords \\ 
+   \hline
+\end{tabular}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

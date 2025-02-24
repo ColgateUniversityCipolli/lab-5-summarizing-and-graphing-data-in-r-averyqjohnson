@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.20)  23 FEB 2025 16:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.20)  24 FEB 2025 18:16
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -374,7 +374,8 @@ Package caption Info: hyperref package is loaded.
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count313
 \l__pdf_internal_box=\box103
-) (./Lab5Writeup.aux)
+)
+No file Lab5Writeup.aux.
 \openout1 = `Lab5Writeup.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
@@ -402,7 +403,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package hyperref Info: Link coloring ON on input line 77.
-(./Lab5Writeup.out) (./Lab5Writeup.out)
 \@outlinefile=\write3
 \openout3 = `Lab5Writeup.out'.
 
@@ -449,46 +449,54 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
 (/Users/averyjohnson/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+
+Package natbib Warning: Citation `essentia' on page 1 undefined on input line 103.
+
+
+Package natbib Warning: Citation `stringr' on page 1 undefined on input line 119.
+
+
+Package natbib Warning: Citation `stringr' on page 1 undefined on input line 130.
+
+
+Package natbib Warning: Citation `jsonlite' on page 1 undefined on input line 130.
+
+[1
 
 {/Users/averyjohnson/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Overfull \hbox (1.7966pt too wide) in paragraph at lines 141--142
 []\OT1/cmr/m/n/10 Merging the data from the \OT1/cmtt/m/n/10 streaming[]music[]extractor
  []
 
-(./Lab5Writeup.bbl)
 
-[2]
-
-LaTeX Warning: Float too large for page by 32.49998pt on input line 272.
+Package natbib Warning: Citation `stringr' on page 2 undefined on input line 145.
 
 
+Package natbib Warning: Citation `jsonlite' on page 2 undefined on input line 145.
 
-[3
 
-]
+Overfull \hbox (22.4491pt too wide) in paragraph at lines 189--219
+ [][] 
+ []
 
-[4] (./Lab5Writeup.aux)
- ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
- ***********
-Package rerunfilecheck Info: File `Lab5Writeup.out' has not changed.
-(rerunfilecheck)             Checksum: 925A114F57659225C562596A330B987B;1555.
- ) 
+No file Lab5Writeup.bbl.
+
+! LaTeX Error: \begin{table} on input line 187 ended by \end{multicols}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.229 \end{multicols}
+                      
 Here is how much of TeX's memory you used:
- 12271 strings out of 475172
- 195961 string characters out of 5764613
- 631897 words of memory out of 5000000
- 35085 multiletter control sequences out of 15000+600000
- 567993 words of font info for 72 fonts, out of 8000000 for 9000
+ 12205 strings out of 475172
+ 195159 string characters out of 5764613
+ 619657 words of memory out of 5000000
+ 35051 multiletter control sequences out of 15000+600000
+ 567644 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,1043b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></Users/averyjohnson/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Lab5Writeup.pdf (4 pages, 170068 bytes).
-PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
- 132 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 500000)
- 89 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 75i,9n,79p,1052b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
+!  ==> Fatal error occurred, no output PDF file produced!
