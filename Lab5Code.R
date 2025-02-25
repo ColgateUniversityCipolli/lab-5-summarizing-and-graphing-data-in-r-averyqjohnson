@@ -81,7 +81,6 @@ results <- lapply(numeric_columns, function(feature) {
 })
 
 combined_results <- bind_rows(results)
-view(combined_results)
 
 ##############################################################################
 # Step 3: create a table that summarizes select features
@@ -97,27 +96,117 @@ filtered_results <- combined_results |>
   filter(feature %in% selected_features) |>
   select(artist, description, feature) 
 
-View(filtered_results)
-
-
 # create Latex table
 library(xtable)
 latex_table <- xtable(filtered_results, 
                       caption="Summary of Features Identifying Influencing Band")
+
+library(xtable)
+full_table_info <- combined_results |>
+  filter(feature %in% selected_features) |>
+  select(artist, min, max, LF, UF, description, feature)
+         
+full_latex_table <- xtable(full_table_info, 
+                           caption="Full Summary of Features Identifying the Influencing Band")
 
 ##############################################################################
 # Step 4: create a graph or a series of graphs that summarize the selected features
 ##############################################################################
 
 # graphs for lyrical features
-positivewords_plot <- ggplot(data=essentia_data,
-                             aes(x=artist,y= positivewords)) +
-  geom_boxplot() +
-  geom_hline(yinterecept=essentia_data_allentown$positivewords)
-  theme_bw() +
+positivewords_plot <- ggplot(data=essentia_data,                #specify the data
+                             aes(x=artist,y= positivewords)) + #specify x and y
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$positivewords, #add horizontal line with allentown value
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +                                                 #remove the grey background
   xlab("Artist") +
   ylab("positivewords")
 
+
+OtherP_plot <- ggplot(data=essentia_data,
+                             aes(x=artist,y= OtherP)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$OtherP,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("otherP")
+
+Perception_plot <- ggplot(data=essentia_data,
+                      aes(x=artist,y= Perception)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$Perception,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("Perception")
+
+conj_plot <- ggplot(data=essentia_data,
+                          aes(x=artist,y= conj)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$conj,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("conj")
+
+library(patchwork)
+positivewords_plot + OtherP_plot + Perception_plot + conj_plot +
+  plot_annotation(title="Lyrical Features")
+
+# graphs for sound features
+spectral_rolloff_plot <- ggplot(data=essentia_data,                #specify the data
+                             aes(x=artist,y= spectral_rolloff)) + #specify x and y
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$spectral_rolloff, #add horizontal line with allentown value
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +                                                 #remove the grey background
+  xlab("Artist") +
+  ylab("spectral_rolloff")
+
+
+average_loudness_plot <- ggplot(data=essentia_data,
+                      aes(x=artist,y= average_loudness)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$average_loudness,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("average_loudness")
+
+chords_strength_plot <- ggplot(data=essentia_data,
+                          aes(x=artist,y= chords_strength)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$chords_strength,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("chords_strength")
+
+dissonance_plot <- ggplot(data=essentia_data,
+                    aes(x=artist,y= dissonance)) +
+  geom_violin(fill="grey80")+
+  geom_boxplot(width=0.1) +
+  geom_hline(yintercept = essentia_data_allentown$dissonance,
+             linetype="dotted", linewidth=1, color="red") +
+  theme_bw() +
+  xlab("Artist") +
+  ylab("dissonance")
+
+library(patchwork)
+spectral_rolloff_plot + average_loudness_plot + chords_strength_plot + dissonance_plot+
+  plot_annotation(title="Sound Features")
+
+
+#PLOTS I WORKED ON AT FIRST WHICH WERE BAD
 
 # Filter for lyrics features vs sound features
 # lyric_features <- c("positivewords", "OtherP", "Perception", "conj")
